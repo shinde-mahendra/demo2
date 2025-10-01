@@ -8,11 +8,12 @@ jobs:
       - checkout
       - run:
           name: "Say hello"
-          command: "echo Hello, World!"
+          command: "echo Hello, World! > hello.md"
       - persist_to_workspace:
           root: .
           paths:
-            - build_output
+            - README.md
+            - hello.md
 
   show-readme:
     docker:
@@ -22,7 +23,7 @@ jobs:
           at: .
       - run:
           name: Display ReadMe
-          command: cat build_output/README.md
+          command: cat README.md; cat hello.md
 
 workflows:
   say-hello-workflow:
